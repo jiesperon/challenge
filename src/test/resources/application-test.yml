@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: challenge
+
+config:
+  user:
+    secretKey: challengechallengechallengechallengechallengechallengechallengechallenge
+    tokenExpirationAfterDays: 10
