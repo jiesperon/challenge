@@ -3,15 +3,13 @@ package com.example.challenge.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.google.common.base.Predicate;
-import static com.google.common.base.Predicates.or;
+
 import static springfox.documentation.builders.PathSelectors.regex;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -45,14 +43,28 @@ public class SwaggerConfig {
 	}
 	
 	@Bean
-	public Docket apiDocket() {
+	public Docket apiLogin() {
 		return new Docket(DocumentationType.SWAGGER_2)
+				.groupName("authentication")
 				.apiInfo(getApiInfo())
 			      .securityContexts(Arrays.asList(securityContext()))
-			      .securitySchemes(Arrays.asList(apiKey()))
+			      
 			      .select()
 			      .apis(RequestHandlerSelectors.basePackage("com.example.challenge.controller"))
-			      .paths(PathSelectors.any())
+			      .paths(PathSelectors.regex("/api/v1/auth.*"))
+			      .build();
+	}
+	
+	@Bean
+	public Docket apiLocation() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.groupName("location")
+				.apiInfo(getApiInfo())
+				  .securitySchemes(Arrays.asList(apiKey()))
+			      .securityContexts(Arrays.asList(securityContext()))
+			      .select()
+			      .apis(RequestHandlerSelectors.basePackage("com.example.challenge.controller"))
+			      .paths(PathSelectors.regex("/api/v1/auth.*").negate())
 			      .build();
 	}
 	

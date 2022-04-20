@@ -18,7 +18,7 @@ public class StateImpl implements State<CoordinatesImpl> {
 		return id;
 	}
 
-	@JsonSetter("ig")
+	@JsonSetter("id")
 	public void setId(Long id) {
 		this.id = id;
 

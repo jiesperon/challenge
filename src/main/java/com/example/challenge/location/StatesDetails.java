@@ -2,7 +2,11 @@ package com.example.challenge.location;
 
 import java.util.List;
 
-public interface StatesDetalis <S extends State<? extends Coordinates>>{
+public interface StatesDetails <S extends State<? extends Coordinates>>{
+	
+	public Long getSize();
+	
+	public void setSize(Long size);
 	
 	public Long getTotalElements();
 	
@@ -12,7 +16,7 @@ public interface StatesDetalis <S extends State<? extends Coordinates>>{
 	
 	public void setStartIndex(Long startIndex);
 	
-	public List<S>  getStates();
+	public List<? extends State<? extends Coordinates>>  getStates();
 	
 	public void setStates(List<S> states);
 	

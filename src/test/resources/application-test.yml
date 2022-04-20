@@ -1,6 +1,13 @@
 spring:
   application:
     name: challenge
+  mvc:
+      pathmatch:
+            matching-strategy: ant-path-matcher
+  
+#logging:
+#  level:
+#   root: DEBUG
 
 config:
   user:
