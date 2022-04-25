@@ -9,6 +9,13 @@ import com.example.challenge.location.StatesDetails;
 
 public interface LocationClient {
 	
+	/**
+	 * Find State Details Information By State Name
+	 * 
+	 * @param name
+	 * @return StatesDetails
+	 * @throws HttpClientErrorException
+	 */
 	StatesDetails<? extends State<? extends Coordinates>> findStateDetailsByStateName(String name) throws HttpClientErrorException;
 
 }

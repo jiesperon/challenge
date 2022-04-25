@@ -12,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,7 +29,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 
 public class AppUserTokenVerifier extends OncePerRequestFilter {
-	
+	private final Logger log = LoggerFactory.getLogger(AppUserTokenVerifier.class);
 	private final SecretKey secretKey;
     private final AppUserConfig appUserConfig;
     
@@ -58,6 +60,8 @@ public class AppUserTokenVerifier extends OncePerRequestFilter {
             Claims body = claimsJws.getBody();
 
             String username = body.getSubject();
+            
+            log.debug("Getting Username '{}' from Token", username);
 
             @SuppressWarnings("unchecked")
 			List<Map<String, String>> authorities = (List<Map<String, String>>) body.get("authorities");

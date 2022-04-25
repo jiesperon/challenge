@@ -10,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,6 +25,7 @@ import io.jsonwebtoken.Jwts;
 
 public class AppUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	
+	private final Logger log = LoggerFactory.getLogger(AppUsernameAndPasswordAuthenticationFilter.class);
 	private final AuthenticationManager authenticationManager;
     private final AppUserConfig appUserConfig;
     private final SecretKey secretKey;
@@ -42,7 +45,9 @@ public class AppUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 		try {
             AppUsernameAndPasswordAuthenticationRequest authenticationRequest = new ObjectMapper()
                     .readValue(request.getInputStream(), AppUsernameAndPasswordAuthenticationRequest.class);
-
+            
+            
+            log.debug("Authentification Username: '{}'", authenticationRequest.getUsername());
             Authentication authentication = new UsernamePasswordAuthenticationToken(
                     authenticationRequest.getUsername(),
                     authenticationRequest.getPassword()

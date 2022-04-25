@@ -25,7 +25,7 @@ class LocationClientTest {
 	@Test
 	void NotFoundStatetest() throws Exception {
 		try {
-			StatesDetails<? extends State<? extends Coordinates>> test = locationClient.findStateDetailsByStateName("Estero");
+			locationClient.findStateDetailsByStateName("Estero");
 		} catch (HttpClientErrorException e) {
 			assertThat(e.getStatusCode() == HttpStatus.NOT_FOUND);
 		}

@@ -28,7 +28,7 @@ public class LocationController {
 	@PreAuthorize("hasAuthority('location:view')")
 	public ResponseEntity<?> getState(@PathParam("name") String name) {
 		log.debug("Input State Name: {}", name);
-		ResponseEntity responseEntity = null;
+		ResponseEntity<?> responseEntity = ResponseEntity.ok().build();
 		try {
 			Coordinates  coordinates = locationService.getCoordinatesByStateName(name);
 			if (coordinates == null) {
