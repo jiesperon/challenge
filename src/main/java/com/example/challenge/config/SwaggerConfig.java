@@ -4,8 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
-import static springfox.documentation.builders.PathSelectors.regex;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

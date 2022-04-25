@@ -1,5 +1,8 @@
 package com.example.challenge.client.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,12 +17,16 @@ import com.example.challenge.location.Coordinates;
 import com.example.challenge.location.State;
 import com.example.challenge.location.StatesDetails;
 import com.example.challenge.location.impl.StatesDetailsImpl;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 
 
-@Service("locationClient")
 public class LocationClientImpl implements LocationClient {
+	
+	private final Logger log = LoggerFactory.getLogger(LocationClientImpl.class);
+	
+	private static final String PROTOCOL= "https";
+	
+	private static final String ENDPOINT = "apis.datos.gob.ar";
 	
 	private static final String ENDPOINT_LOCATION_STATE = "/georef/api/provincias?nombre={name}";
 	
@@ -27,20 +34,23 @@ public class LocationClientImpl implements LocationClient {
 	
 	private final RestTemplate restTemplate;	
 	
-	public LocationClientImpl() {
-		String endpoint = buildUrl("https", "apis.datos.gob.ar", null);
-		this.restTemplate = new RestTemplate();
+	
+	public LocationClientImpl(RestTemplate restTemplate) {
+		String endpoint = buildUrl(PROTOCOL, ENDPOINT, null);
+		this.restTemplate = restTemplate;
 		this.prototypeEndpoint = endpoint + ENDPOINT_LOCATION_STATE;
 	}
 	
 	
 	@Override
 	public StatesDetails<? extends State<? extends Coordinates>> findStateDetailsByStateName(String name) throws HttpClientErrorException {
-		HttpHeaders headers = new HttpHeaders();
+		log.debug("Client Request State Name: {}", name);
+		HttpHeaders headers = new HttpHeaders();		
 		HttpEntity<Void> requestEntity = new HttpEntity<Void>(headers);
 		ResponseEntity<StatesDetailsImpl> responseEntity = restTemplate.exchange(this.prototypeEndpoint, HttpMethod.GET, requestEntity, StatesDetailsImpl.class, name);
 		StatesDetailsImpl entity = null;
 		entity = responseEntity.getBody();
+		log.debug("Client Resopnce: {}", entity);
 		return entity;
 	}
 	

@@ -1,4 +1,4 @@
-package com.example.challenge.auth;
+package com.example.challenge.auth.domain;
 
 import java.io.IOException;
 import java.util.List;

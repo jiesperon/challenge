@@ -1,6 +1,5 @@
 package com.example.challenge.controllers;
 
-import java.util.List;
 
 import javax.websocket.server.PathParam;
 
@@ -14,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 
-import com.example.challenge.client.LocationClient;
 import com.example.challenge.location.Coordinates;
 import com.example.challenge.location.LocationService;
-import com.example.challenge.location.State;
-import com.example.challenge.location.StatesDetails;
 
 @RestController
 @RequestMapping("api/v1/location")
@@ -31,7 +27,7 @@ public class LocationController {
 	@GetMapping("state")
 	@PreAuthorize("hasAuthority('location:view')")
 	public ResponseEntity<?> getState(@PathParam("name") String name) {
-		log.info("Input State Name: {}", name);
+		log.debug("Input State Name: {}", name);
 		ResponseEntity responseEntity = null;
 		try {
 			Coordinates  coordinates = locationService.getCoordinatesByStateName(name);

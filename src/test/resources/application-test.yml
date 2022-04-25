@@ -5,10 +5,13 @@ spring:
       pathmatch:
             matching-strategy: ant-path-matcher
   
-#logging:
-#  level:
-#   root: DEBUG
-
+logging:
+  level:
+#   root: INFO
+#   org.springframework: DEBUG
+   com.example.challenge: DEBUG
+   
+    
 config:
   user:
     secretKey: challengechallengechallengechallengechallengechallengechallengechallenge

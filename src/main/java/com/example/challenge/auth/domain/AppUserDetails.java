@@ -1,4 +1,4 @@
-package com.example.challenge.auth;
+package com.example.challenge.auth.domain;
 
 import java.util.Collection;
 import java.util.Set;

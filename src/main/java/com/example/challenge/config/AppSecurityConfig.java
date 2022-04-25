@@ -15,9 +15,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.example.challenge.auth.AppUserDetailsService;
-import com.example.challenge.auth.AppUserTokenVerifier;
-import com.example.challenge.auth.AppUsernameAndPasswordAuthenticationFilter;
+import com.example.challenge.auth.domain.AppUserDetailsService;
+import com.example.challenge.auth.domain.AppUserTokenVerifier;
+import com.example.challenge.auth.domain.AppUsernameAndPasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -64,7 +64,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilter(new AppUsernameAndPasswordAuthenticationFilter(authenticationManager(), appUserConfig, secretKey))
             .addFilterAfter(new AppUserTokenVerifier(secretKey, appUserConfig),AppUsernameAndPasswordAuthenticationFilter.class)
             .authorizeRequests()
-            .antMatchers("/", "index", "/css/*", "/js/*", "/login", "/swagger-ui/*", "/swagger-resources/**","/v2/api-docs", "/api/v1/auth/*").permitAll()
+            .antMatchers("/", "index", "/css/*", "/js/*", "/login", "/swagger-ui/*", "/swagger-resources/**","/v2/api-docs", "/api/v1/auth/*","/api/v1/auth/login").permitAll()
             .anyRequest()
             .authenticated();
 	}

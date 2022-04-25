@@ -1,4 +1,4 @@
-package com.example.challenge.auth;
+package com.example.challenge.auth.impl;
 
 import java.util.HashSet;
 import java.util.List;
@@ -11,15 +11,17 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.example.challenge.auth.AppUserDetailsDaoService;
+import com.example.challenge.auth.domain.AppUserDetails;
 import com.google.common.collect.Lists;
 
 @Profile("test")
 @Repository("app-user-details")
-public class AppUserDetailDaoServiceTest implements AppUserDetailsDao {
+public class MemoryAppUserDetailDaoServiceForMock implements AppUserDetailsDaoService {
 	private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AppUserDetailDaoServiceTest(PasswordEncoder passwordEncoder) {
+    public MemoryAppUserDetailDaoServiceForMock(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
