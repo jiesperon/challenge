@@ -20,5 +20,5 @@ Cuando se corra la aplicacion tiene en swagger 2 definiciones es **authenticatio
 Tambien quiero agregar que por atras esta yendo a [Api de Datos del gobierno de GeoReferencia](https://apis.datos.gob.ar/georef/api/provincias ).
 
 ##### Base
-No decidi hacerlo con una base de Datos, Porque tenia que usar flyway como framework para levantar todo el schema y crear los datos y eso me iba a llevar mas tiempo del debido, por lo que me decidi por crear un Repository MemoryAppUserDetailsDaoService que traquilamente podria ser remplazado por una base de datos cuando se cree.
+No decidi hacerlo con una base de datos(imagen docker con mysql) porque tenia pensado usar flyway como framework para levantar todo el schema, crear los datos pero eso me iba a llevar mas tiempo del debido, por lo que me decidi por crear un Repository MemoryAppUserDetailsDaoService que traquilamente podria ser remplazado por una base de datos cuando se cree.
  
